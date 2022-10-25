@@ -3,5 +3,12 @@
         <content>
            <core:Fragment fragmentName="at.clouddna.training00.zhoui5.view.fragment.ChangeCustomer" type="XML"/>
         </content>
+        <footer>
+            <Bar>
+                <contentRight>
+                    <Button id="customer_button_save" text="{i18n>button.save}" type="Accept" press="onSavePress"/>
+                </contentRight>
+            </Bar>
+        </footer>
     </Page>
 </mvc:View>
