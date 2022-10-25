@@ -10,6 +10,15 @@ sap.ui.define([
         return Controller.extend("at.clouddna.training00.zhoui5.controller.Customer", {
             onInit: function () {
 
+            },
+
+            genderFormatter: function(genderKey){
+                const view = this.getView(),
+                    i18nModel = view.getModel("i18n"),
+                    resourceBundle = i18nModel.getResourceBundle(),
+                    formattedText = resourceBundle.getText(`gender.${genderKey}`);
+
+                return formattedText;
             }
         });
     });

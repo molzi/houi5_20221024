@@ -33,7 +33,7 @@
                     <Label id="customer_label_gender" text="{i18n>customer.gender}" labelFor="customer_select_gender" />
                     <Select id="customer_select_gender" selectedKey="{/gender}" items="{genderModel>/genders}">
                         <items>
-                            <core:Item key="{ genderModel>}" text="{= ${genderModel>} === 'female' ? ${i18n>gender.female} : ${i18n>gender.male}}"/>
+                            <core:Item key="{genderModel>}" text="{path: 'genderModel>', formatter: '.genderFormatter'}"/>
                         </items>
                     </Select>
                     <core:Title text="{i18n>customer.contactInfo}" />
