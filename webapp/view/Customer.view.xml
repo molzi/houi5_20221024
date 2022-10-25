@@ -23,28 +23,26 @@
                 <f:content>
                     <core:Title text="{i18n>customer.personalData}" />
                     <Label id="customer_label_customerid" text="{i18n>customer.customerID}" labelFor="customer_input_customerid" />
-                    <Input id="customer_input_customerid" value="10001010" placeholder="{i18n>customer.customerID}" />
+                    <Input id="customer_input_customerid" value="{/customerid}" placeholder="{i18n>customer.customerID}" />
                     <Label id="customer_label_firstname" text="{i18n>customer.firstName}" labelFor="customer_input_firstname" />
-                    <Input id="customer_input_firstname" value="Max" />
+                    <Input id="customer_input_firstname" value="{/firstname}" />
                     <Label id="customer_label_lastname" text="{i18n>customer.lastName}" labelFor="customer_input_lastname" />
-                    <Input id="customer_input_lastname" value="Mustermann" />
+                    <Input id="customer_input_lastname" value="{/lastname}" />
                     <Label id="customer_label_title" text="{i18n>customer.title}" labelFor="customer_input_title" />
-                    <Input id="customer_input_title" value="Dr." />
+                    <Input id="customer_input_title" value="{/title}" />
                     <Label id="customer_label_gender" text="{i18n>customer.gender}" labelFor="customer_select_gender" />
-                    <Select id="customer_select_gender" selectedKey="M">
+                    <Select id="customer_select_gender" selectedKey="{/gender}" items="{genderModel>/genders}">
                         <items>
-                            <core:Item key="M" text="{i18n>gender.male}" />
-                            <core:Item key="F" text="{i18n>gender.female}" />
-                            <core:Item key="O" text="{i18n>gender.other}" />
+                            <core:Item key="{ genderModel>}" text="{= ${genderModel>} === 'female' ? ${i18n>gender.female} : ${i18n>gender.male}}"/>
                         </items>
                     </Select>
                     <core:Title text="{i18n>customer.contactInfo}" />
                     <Label id="customer_label_email" text="{i18n>customer.email}" labelFor="customer_input_email" />
-                    <Input id="customer_input_email" value="max.mustermann@mail.com" />
+                    <Input id="customer_input_email" value="{/email}" />
                     <Label id="customer_label_phone" text="{i18n>customer.phone}" labelFor="customer_input_phone" />
-                    <Input id="customer_input_phone" value="0234234234234" />
+                    <Input id="customer_input_phone" value="{/phone}" />
                     <Label id="customer_label_website" text="{i18n>customer.website}" labelFor="customer_input_website" />
-                    <Input id="customer_input_website" value="https://sap.com" />
+                    <Input id="customer_input_website" value="{/website}" />
                 </f:content>
             </f:SimpleForm>
         </content>
