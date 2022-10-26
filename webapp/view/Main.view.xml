@@ -4,7 +4,7 @@
     xmlns="sap.m">
     <Page id="main_page" title="{i18n>main.page.title}">
         <content>
-            <Table id="main_table" headerText="{i18n>main.table.title}" items="{/customers}">
+            <Table id="main_table" headerText="{i18n>main.table.title}" items="{/CustomerSet}">
                 <columns>
                     <Column >
                         <Text text="{i18n>customer.customerID}"/>
@@ -34,14 +34,14 @@
                 <items>
                     <ColumnListItem>
                         <cells>
-                            <ObjectIdentifier title="{customerid}"/>
-                            <Text text="{firstname}" />
-                            <Text text="{lastname}" />
-                            <Text text="{title}" />
-                            <Text text="{path: 'gender', formatter: '.genderFormatter'}" />
-                            <Link text="{email}" press="onEmailPress"/>
-                            <Text text="{phone}"/>
-                            <Link text="{website}" href="https://{website}" target="_blank"/>
+                            <ObjectIdentifier title="{CustomerId}"/>
+                            <Text text="{Firstname}" />
+                            <Text text="{Lastname}" />
+                            <Text text="{AcademicTitle}" />
+                            <Text text="{path: 'Gender', formatter: '.genderFormatter'}" />
+                            <Link text="{Email}" press="onEmailPress"/>
+                            <Text text="{Phone}"/>
+                            <Link text="{Website}" href="https://{Website}" target="_blank"/>
                         </cells>
                     </ColumnListItem>
                 </items>
