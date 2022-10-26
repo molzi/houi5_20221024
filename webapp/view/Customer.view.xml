@@ -1,12 +1,22 @@
 <mvc:View controllerName="at.clouddna.training00.zhoui5.controller.Customer" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" displayBlock="true" xmlns="sap.m" xmlns:f="sap.ui.layout.form">
-    <Page id="page" title="{i18n>customer.page.title}">
+    <Page id="page" >
+        <customHeader>
+            <OverflowToolbar >
+                <content>
+                    <Title text="{i18n>customer.page.title}"/>
+                    <ToolbarSpacer />
+                    <Button text="{i18n>button.edit}" type="Emphasized" icon="sap-icon://edit" id="customer_button_edit" press="onEditPress"/>
+                </content>
+            </OverflowToolbar>
+        </customHeader>
         <content>
            <core:Fragment fragmentName="at.clouddna.training00.zhoui5.view.fragment.ChangeCustomer" type="XML"/>
         </content>
         <footer>
             <Bar>
                 <contentRight>
-                    <Button id="customer_button_save" text="{i18n>button.save}" type="Accept" press="onSavePress"/>
+                    <Button id="customer_button_save" text="{i18n>button.save}" type="Accept" press="onSavePress" icon="sap-icon://save"/>
+                    <Button id="customer_button_cancel" text="{i18n>button.cancel}" type="Reject" press="onCancelPress" icon="sap-icon://cancel"/>
                 </contentRight>
             </Bar>
         </footer>
