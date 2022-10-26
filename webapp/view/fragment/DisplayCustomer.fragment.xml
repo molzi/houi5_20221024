@@ -20,23 +20,23 @@
     >
         <f:content>
             <core:Title text="{i18n>customer.personalData}" />
-            <Label id="display_label_customerid" text="{i18n>customer.customerID}" labelFor="display_input_customerid" />
-            <Text id="display_input_customerid" text="{/customerid}"/>
-            <Label id="display_label_firstname" text="{i18n>customer.firstName}" labelFor="display_input_firstname" />
-            <Text id="display_input_firstname" text="{/firstname}" />
-            <Label id="display_label_lastname" text="{i18n>customer.lastName}" labelFor="display_input_lastname" />
-            <Text id="display_input_lastname" text="{/lastname}" />
-            <Label id="display_label_title" text="{i18n>customer.title}" labelFor="display_input_title" />
-            <Text id="display_input_title" text="{/title}" />
+            <Label id="display_label_customerid" text="{i18n>customer.customerID}" labelFor="display_text_customerid" />
+            <Text id="display_text_customerid" text="{/customerid}"/>
+            <Label id="display_label_firstname" text="{i18n>customer.firstName}" labelFor="display_text_firstname" />
+            <Text id="display_text_firstname" text="{/firstname}" />
+            <Label id="display_label_lastname" text="{i18n>customer.lastName}" labelFor="display_text_lastname" />
+            <Text id="display_text_lastname" text="{/lastname}" />
+            <Label id="display_label_title" text="{i18n>customer.title}" labelFor="display_text_title" />
+            <Text id="display_text_title" text="{/title}" />
             <Label id="display_label_gender" text="{i18n>customer.gender}" labelFor="display_text_gender" />
             <Text id="display_text_gender" text="{path: '/gender', formatter: '.genderFormatter'}"/>
             <core:Title text="{i18n>customer.contactInfo}" />
-            <Label id="display_label_email" text="{i18n>customer.email}" labelFor="display_input_email" />
-            <Text id="display_input_email" text="{/email}" />
-            <Label id="display_label_phone" text="{i18n>customer.phone}" labelFor="display_input_phone" />
-            <Text id="display_input_phone" text="{/phone}" />
-            <Label id="display_label_website" text="{i18n>customer.website}" labelFor="display_input_website" />
-            <Text id="display_input_website" text="{/website}" />
+            <Label id="display_label_email" text="{i18n>customer.email}" labelFor="display_text_email" />
+            <Text id="display_text_email" text="{/email}" />
+            <Label id="display_label_phone" text="{i18n>customer.phone}" labelFor="display_text_phone" />
+            <Text id="display_text_phone" text="{/phone}" />
+            <Label id="display_label_website" text="{i18n>customer.website}" labelFor="display_text_website" />
+            <Text id="display_text_website" text="{/website}" />
         </f:content>
     </f:SimpleForm>
 </core:FragmentDefinition>
