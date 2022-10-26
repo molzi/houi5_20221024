@@ -4,7 +4,7 @@
     xmlns="sap.m">
     <Page id="main_page" title="{i18n>main.page.title}">
         <content>
-            <Table id="main_table" headerText="{i18n>main.table.title}" items="{/CustomerSet}">
+            <Table id="main_table" headerText="{i18n>main.table.title}" items="{/CustomerSet}" mode="Delete" delete="onCustomerDelete">
                 <columns>
                     <Column >
                         <Text text="{i18n>customer.customerID}"/>
