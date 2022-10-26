@@ -101,11 +101,16 @@
       },
       "routes": [
         {
-          "name": "RouteCustomer",
+          "name": "Main",
           "pattern": ":?query:",
           "target": [
             "TargetMain"
           ]
+        },
+        {
+            "name": "Customer",
+            "target": ["TargetCustomer"],
+            "pattern": "customer/{customerId}"
         }
       ],
       "targets": {

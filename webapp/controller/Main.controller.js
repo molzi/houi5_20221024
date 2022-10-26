@@ -23,6 +23,16 @@ sap.ui.define(
             sap.m.URLHelper.triggerEmail(event.getSource().getText());
         },
 
+        onCustomerPress: function(event){
+            const customerId = event.getSource().getBindingContext().getObject().CustomerId,
+                router = this.getOwnerComponent().getRouter();
+
+
+            router.navTo("Customer", {
+                customerId: customerId
+            });
+        },
+
         onCustomerDelete: function(event){
             let path = event.getParameter("listItem").getBindingContext().getPath(),
                 model = this.getView().getModel(),

@@ -1,8 +1,9 @@
 <mvc:View controllerName="at.clouddna.training00.zhoui5.controller.Customer" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" displayBlock="true" xmlns="sap.m" xmlns:f="sap.ui.layout.form">
-    <Page id="customer_page" showFooter="{editModel>/editmode}" >
+    <Page id="customer_page" showFooter="{editModel>/editmode}">
         <customHeader>
             <OverflowToolbar >
                 <content>
+                <Button id="customer_button_back" press="onNavBack" visible="{= !${editModel>/editmode}}" type="Back"/>
                     <Title text="{i18n>customer.page.title}"/>
                     <ToolbarSpacer />
                     <Button text="{i18n>button.edit}" type="Emphasized" icon="sap-icon://edit" id="customer_button_edit" press="onEditPress" visible="{= !${editModel>/editmode}}"/>

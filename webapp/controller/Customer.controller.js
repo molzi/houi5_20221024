@@ -2,12 +2,13 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/ui/core/routing/History"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageBox, JSONModel, Fragment) {
+    function (Controller, MessageBox, JSONModel, Fragment, History) {
         "use strict";
 
         return Controller.extend("at.clouddna.training00.zhoui5.controller.Customer", {
@@ -21,6 +22,17 @@ sap.ui.define([
                 this.getView().setModel(editModel, "editModel");
                 
                 this._showCustomerFragment("DisplayCustomer");
+
+                this.getOwnerComponent().getRouter().getRoute("Customer").attachPatternMatched(this._onPatternMatched.bind(this), this);
+            },
+
+            _onPatternMatched: function(event){
+                let customerId = event.getParameter("arguments").customerId,
+                    path = this.getView().getModel().createKey("CustomerSet", {
+                        CustomerId: customerId
+                    });
+                
+                this.getView().bindElement("/" + path);
             },
 
             _toggleEdit: function(isEditMode){
@@ -75,6 +87,21 @@ sap.ui.define([
                 MessageBox.success(JSON.stringify(data));
 
                 this._toggleEdit(false);
+            },
+
+            onNavBack: function(){
+                let history = History.getInstance(),
+                    previousHash = history.getPreviousHash();
+
+                if(previousHash){
+                    window.history.go(-1);
+                } else {
+                    let router = this.getOwnerComponent().getRouter();
+
+                    router.navTo("Main");
+                }
+
+                debugger;
             }
         });
     });
