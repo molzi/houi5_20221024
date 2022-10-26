@@ -1,0 +1,51 @@
+<mvc:View controllerName="at.clouddna.training00.zhoui5.controller.Main"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="main_page" title="{i18n>main.page.title}">
+        <content>
+            <Table id="main_table" headerText="{i18n>main.table.title}" items="{/customers}">
+                <columns>
+                    <Column >
+                        <Text text="{i18n>customer.customerID}"/>
+                    </Column>
+                     <Column >
+                        <Text text="{i18n>customer.firstName}"/>
+                    </Column>
+                     <Column >
+                        <Text text="{i18n>customer.lastName}"/>
+                    </Column>
+                     <Column minScreenWidth="Desktop">
+                        <Text text="{i18n>customer.title}"/>
+                    </Column>
+                     <Column minScreenWidth="Desktop">
+                        <Text text="{i18n>customer.gender}"/>
+                    </Column>
+                     <Column minScreenWidth="Desktop">
+                        <Text text="{i18n>customer.email}"/>
+                    </Column>
+                     <Column minScreenWidth="Desktop">
+                        <Text text="{i18n>customer.phone}"/>
+                    </Column>
+                     <Column minScreenWidth="Desktop">
+                        <Text text="{i18n>customer.website}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{customerid}"/>
+                            <Text text="{firstname}" />
+                            <Text text="{lastname}" />
+                            <Text text="{title}" />
+                            <Text text="{path: 'gender', formatter: '.genderFormatter'}" />
+                            <Link text="{email}" press="onEmailPress"/>
+                            <Text text="{phone}"/>
+                            <Link text="{website}" href="https://{website}" target="_blank"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

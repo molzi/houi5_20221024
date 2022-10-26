@@ -100,7 +100,7 @@
           "name": "RouteCustomer",
           "pattern": ":?query:",
           "target": [
-            "TargetCustomer"
+            "TargetMain"
           ]
         }
       ],
@@ -111,7 +111,14 @@
           "clearControlAggregation": false,
           "viewId": "Customer",
           "viewName": "Customer"
-        }
+        },
+        "TargetMain": {
+            "viewType": "XML",
+            "transition": "slide",
+            "clearControlAggregation": false,
+            "viewId": "Main",
+            "viewName": "Main"
+          }
       }
     },
     "rootView": {
