@@ -12,6 +12,9 @@ sap.ui.define(
 
         onInit() {
             this.setContentDensity();
+
+            this.setModel(this.getOwnerComponent().getModel("cdsModel"));
+            this.getView().byId("main_smarttable").rebindTable();
         },
 
         onEmailPress: function(event){
@@ -32,8 +35,11 @@ sap.ui.define(
         },
 
         onCustomerDelete: function(event){
-            let path = event.getParameter("listItem").getBindingContext().getPath(),
-                model = this.getModel();
+            let customerId = event.getSource().getBindingContext().getObject().CustomerId,
+                model = this.getOwnerComponent().getModel(),
+                path = model.createKey("/CustomerSet", {
+                    CustomerId: customerId
+                });
 
             MessageBox.warning(this.getLocalizedText("msg.confirm.delete.text"), {
                title: this.getLocalizedText("msg.confirm.delete.title"),
@@ -44,6 +50,7 @@ sap.ui.define(
                        model.remove(path, {
                            success: (data, respons)=>{
                                 MessageBox.success(this.getLocalizedText("msg.delete.success"));
+                                this.getModel().refresh();
                            },
                            error: (error)=>{
                                 MessageBox.error(error.message);

@@ -1,145 +1,176 @@
 {
-  "_version": "1.37.0",
-  "sap.app": {
-    "id": "at.clouddna.training00.zhoui5",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
-    },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
-      "version": "1.7.6",
-      "toolsId": "eac9d3ad-0411-4537-8c92-f56ba3de2680"
-    },
-    "dataSources": {
-      "ZHOUI5_CUSTOMER_SRV": {
-        "uri": "/sap/opu/odata/sap/ZHOUI5_CUSTOMER_SRV/",
-        "type": "OData",
-        "settings": {
-          "odataVersion": "2.0",
-          "localUri": "localService/metadata.xml"
-        }
-      }
-    }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    }
-  },
-  "sap.ui5": {
-    "flexEnabled": false,
-    "dependencies": {
-      "minUI5Version": "1.96.14",
-      "libs": {
-        "sap.m": {},
-        "sap.ui.core": {},
-        "sap.f": {},
-        "sap.suite.ui.generic.template": {},
-        "sap.ui.comp": {},
-        "sap.ui.generic.app": {},
-        "sap.ui.table": {},
-        "sap.ushell": {}
-      }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "at.clouddna.training00.zhoui5.i18n.i18n"
-        }
-      },
-      "": {
-        "dataSource": "ZHOUI5_CUSTOMER_SRV",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": true
-        }
-      },
-      "genderModel": {
-        "type": "sap.ui.model.json.JSONModel",
-        "uri": "data/genders.json"
-      }
-    },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "async": true,
-        "viewPath": "at.clouddna.training00.zhoui5.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
-      },
-      "routes": [
-        {
-          "name": "Main",
-          "pattern": ":?query:",
-          "target": [
-            "TargetMain"
-          ]
+    "_version": "1.37.0",
+    "sap.app": {
+        "id": "at.clouddna.training00.zhoui5",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
         },
-        {
-            "name": "Customer",
-            "target": ["TargetCustomer"],
-            "pattern": "customer/{customerId}"
-        }, 
-        {
-            "name": "CreateCustomer",
-            "target": ["TargetCustomer"],
-            "pattern": "createCustomer"
-        }
-      ],
-      "targets": {
-        "TargetCustomer": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "Customer",
-          "viewName": "Customer"
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.7.6",
+            "toolsId": "eac9d3ad-0411-4537-8c92-f56ba3de2680"
         },
-        "TargetMain": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "Main",
-          "viewName": "Main"
+        "dataSources": {
+            "ZHOUI5_CUSTOMER_SRV": {
+                "uri": "/sap/opu/odata/sap/ZHOUI5_CUSTOMER_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/ZHOUI5_CUSTOMER_SRV/metadata.xml"
+                }
+            },
+            "ZHOUI5_CDS_Annotation": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZHOUI5_CDS_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZHOUI5_CDS/ZHOUI5_CDS_Annotation.xml"
+                }
+            },
+            "ZHOUI5_CDS": {
+                "uri": "/sap/opu/odata/sap/ZHOUI5_CDS/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [
+                        "ZHOUI5_CDS_Annotation"
+                    ],
+                    "localUri": "localService/ZHOUI5_CDS/metadata.xml"
+                }
+            }
         }
-      }
     },
-    "rootView": {
-      "viewName": "at.clouddna.training00.zhoui5.view.App",
-      "type": "XML",
-      "async": true,
-      "id": "App"
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.96.14",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "at.clouddna.training00.zhoui5.i18n.i18n"
+                }
+            },
+            "cdsModel": {
+                "dataSource": "ZHOUI5_CDS",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            },
+            "": {
+                "dataSource": "ZHOUI5_CUSTOMER_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": true
+                }
+            },
+            "genderModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "data/genders.json"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "at.clouddna.training00.zhoui5.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "Main",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetMain"
+                    ]
+                },
+                {
+                    "name": "Customer",
+                    "target": [
+                        "TargetCustomer"
+                    ],
+                    "pattern": "customer/{customerId}"
+                },
+                {
+                    "name": "CreateCustomer",
+                    "target": [
+                        "TargetCustomer"
+                    ],
+                    "pattern": "createCustomer"
+                }
+            ],
+            "targets": {
+                "TargetCustomer": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Customer",
+                    "viewName": "Customer"
+                },
+                "TargetMain": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Main",
+                    "viewName": "Main"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "at.clouddna.training00.zhoui5.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
     }
-  }
 }

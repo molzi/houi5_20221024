@@ -1,58 +1,58 @@
-<mvc:View controllerName="at.clouddna.training00.zhoui5.controller.Main"
+<mvc:View
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    controllerName="at.clouddna.training00.zhoui5.controller.Main"
     xmlns:html="http://www.w3.org/1999/xhtml"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="main_page" title="{i18n>main.page.title}">
-        <content>
-            <Table id="main_table"  items="{/CustomerSet}" mode="Delete" delete="onCustomerDelete">
-                <headerToolbar>
-                    <OverflowToolbar >
-                        <Title text="{i18n>main.table.title}"/>
-                        <ToolbarSpacer/>
-                        <Button id="main_button_create" icon="sap-icon://add" type="Ghost" text="{i18n>button.create}" press="onCreatePress"/>
-                    </OverflowToolbar>
-                </headerToolbar>
-                <columns>
-                    <Column >
-                        <Text text="{i18n>customer.customerID}"/>
-                    </Column>
-                     <Column >
-                        <Text text="{i18n>customer.firstName}"/>
-                    </Column>
-                     <Column >
-                        <Text text="{i18n>customer.lastName}"/>
-                    </Column>
-                     <Column minScreenWidth="Desktop">
-                        <Text text="{i18n>customer.title}"/>
-                    </Column>
-                     <Column minScreenWidth="Desktop">
-                        <Text text="{i18n>customer.gender}"/>
-                    </Column>
-                     <Column minScreenWidth="Desktop">
-                        <Text text="{i18n>customer.email}"/>
-                    </Column>
-                     <Column minScreenWidth="Desktop">
-                        <Text text="{i18n>customer.phone}"/>
-                    </Column>
-                     <Column minScreenWidth="Desktop">
-                        <Text text="{i18n>customer.website}"/>
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem type="Navigation" press="onCustomerPress">
-                        <cells>
-                            <ObjectIdentifier title="{CustomerId}"/>
-                            <Text text="{Firstname}" />
-                            <Text text="{Lastname}" />
-                            <Text text="{AcademicTitle}" />
-                            <Text text="{path: 'Gender', formatter: '.genderFormatter'}" />
-                            <Link text="{Email}" press="onEmailPress"/>
-                            <Text text="{Phone}"/>
-                            <Link text="{Website}" href="https://{Website}" target="_blank"/>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
-        </content>
-    </Page>
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <uxap:ObjectPageLayout showAnchorBar="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:expandedHeading>
+                    <Title text="{i18n>main.page.title}"/>
+                </uxap:expandedHeading>
+
+                <uxap:snappedHeading>
+                    <Title text="{i18n>main.page.title}"/>
+                </uxap:snappedHeading>
+        
+                <uxap:snappedTitleOnMobile>
+                    <Title text="{i18n>main.page.title}" wrapping="true" />
+                </uxap:snappedTitleOnMobile>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <uxap:headerContent>
+            <smartfilterbar:SmartFilterBar id="main_smartfilterbar" entitySet="ZHOUI5_CUSTOMERSET" />
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection titleUppercase="false">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <smarttable:SmartTable id="main_smarttable" smartFilterId="main_smartfilterbar" entitySet="ZHOUI5_CUSTOMERSET" enableAutoBinding="true" useVariantManagement="true" header="{i18n>main.table.title}" tableType="ResponsiveTable">
+                            <Table sticky="ColumnHeaders">
+                                <columns>
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "main_delete_column", "columnIndex": "99"}' />
+                                        </customData>
+                                        <Text text="{i18n>column.delete}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Navigation" press="onCustomerPress">
+                                        <Button icon="sap-icon://delete" type="Reject" press="onCustomerDelete" />
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </smarttable:SmartTable>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
 </mvc:View>
