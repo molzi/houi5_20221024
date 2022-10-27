@@ -1,6 +1,6 @@
 sap.ui.define(
     [
-        "sap/ui/core/mvc/Controller",
+        "at/clouddna/training00/zhoui5/controller/BaseController",
         "sap/m/MessageBox",
         "at/clouddna/training00/zhoui5/controller/formatter/HOUI5Formatter"
     ],
@@ -11,6 +11,7 @@ sap.ui.define(
         ...HOUI5Formatter,
 
         onInit() {
+            this.setContentDensity();
         },
 
         onEmailPress: function(event){
@@ -18,37 +19,31 @@ sap.ui.define(
         },
 
         onCreatePress: function(){
-            let router = this.getOwnerComponent().getRouter();
-
-
-            router.navTo("CreateCustomer");
+            this.getRouter().navTo("CreateCustomer");
         },
 
-
         onCustomerPress: function(event){
-            const customerId = event.getSource().getBindingContext().getObject().CustomerId,
-                router = this.getOwnerComponent().getRouter();
+            const customerId = event.getSource().getBindingContext().getObject().CustomerId;
 
 
-            router.navTo("Customer", {
+            this.getRouter().navTo("Customer", {
                 customerId: customerId
             });
         },
 
         onCustomerDelete: function(event){
             let path = event.getParameter("listItem").getBindingContext().getPath(),
-                model = this.getView().getModel(),
-                resourceBundle = this.getView().getModel("i18n").getResourceBundle();
+                model = this.getModel();
 
-            MessageBox.warning(resourceBundle.getText("msg.confirm.delete.text"), {
-               title: resourceBundle.getText("msg.confirm.delete.title"),
+            MessageBox.warning(this.getLocalizedText("msg.confirm.delete.text"), {
+               title: this.getLocalizedText("msg.confirm.delete.title"),
                actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                emphasizedAction: MessageBox.Action.YES,
                onClose: (chosenAction)=>{
                    if(chosenAction === MessageBox.Action.YES){
                        model.remove(path, {
                            success: (data, respons)=>{
-                                MessageBox.success(resourceBundle.getText("msg.delete.success"));
+                                MessageBox.success(this.getLocalizedText("msg.delete.success"));
                            },
                            error: (error)=>{
                                 MessageBox.error(error.message);

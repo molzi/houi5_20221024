@@ -1,5 +1,5 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "at/clouddna/training00/zhoui5/controller/BaseController",
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
@@ -23,15 +23,15 @@ sap.ui.define([
                     editmode: false
                 });
 
-                this.getView().setModel(editModel, "editModel");
+                this.setModel(editModel, "editModel");
 
-                this.getOwnerComponent().getRouter().getRoute("Customer").attachPatternMatched(this._onPatternMatched.bind(this), this);
-                this.getOwnerComponent().getRouter().getRoute("CreateCustomer").attachPatternMatched(this._onCreatePatternMatched.bind(this), this);
+                this.getRouter().getRoute("Customer").attachPatternMatched(this._onPatternMatched.bind(this), this);
+                this.getRouter().getRoute("CreateCustomer").attachPatternMatched(this._onCreatePatternMatched.bind(this), this);
             },
 
             _onPatternMatched: function(event){
                 let customerId = event.getParameter("arguments").customerId,
-                    path = this.getView().getModel().createKey("CustomerSet", {
+                    path = this.getModel().createKey("CustomerSet", {
                         CustomerId: customerId
                     });
                 
@@ -43,7 +43,7 @@ sap.ui.define([
             },
 
             _onCreatePatternMatched: function(){
-                let newCustomerContext = this.getView().getModel().createEntry("/CustomerSet");
+                let newCustomerContext = this.getModel().createEntry("/CustomerSet");
 
                 this.getView().bindElement(newCustomerContext.getPath());
 
@@ -53,7 +53,7 @@ sap.ui.define([
             },
 
             _toggleEdit: function(isEditMode){
-                let editModel = this.getView().getModel("editModel");
+                let editModel = this.getModel("editModel");
 
                 editModel.setProperty("/editmode", isEditMode);
 
@@ -80,7 +80,7 @@ sap.ui.define([
             },
 
             onCancelPress: function(){
-                let model = this.getView().getModel();
+                let model = this.getModel();
 
                 if(model.hasPendingChanges()){
                     model.resetChanges().then(()=>{
@@ -100,11 +100,8 @@ sap.ui.define([
             },
 
             onSavePress: function(){
-                let model = this.getView().getModel(),
-                    i18nModel = this.getView().getModel("i18n"),
-                    resourceBundle = i18nModel.getResourceBundle(),
-                    successText = resourceBundle.getText(this.isCreateMode ? "msg.create.success" : "msg.save.success");
-
+                let model = this.getModel(),
+                    successText = this.getLocalizedText(this.isCreateMode ? "msg.create.success" : "msg.save.success");
 
                 if(model.hasPendingChanges()){
                     model.submitChanges({
@@ -127,20 +124,5 @@ sap.ui.define([
                     this._toggleEdit(false);
                 }
             },
-
-            onNavBack: function(){
-                let history = History.getInstance(),
-                    previousHash = history.getPreviousHash();
-
-                if(previousHash){
-                    window.history.go(-1);
-                } else {
-                    let router = this.getOwnerComponent().getRouter();
-
-                    router.navTo("Main");
-                }
-
-                debugger;
-            }
         });
     });
