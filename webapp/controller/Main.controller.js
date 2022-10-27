@@ -1,22 +1,16 @@
 sap.ui.define(
     [
         "sap/ui/core/mvc/Controller",
-        "sap/m/MessageBox"
+        "sap/m/MessageBox",
+        "at/clouddna/training00/zhoui5/controller/formatter/HOUI5Formatter"
     ],
-    function(BaseController, MessageBox) {
+    function(BaseController, MessageBox, HOUI5Formatter) {
       "use strict";
-  
+
       return BaseController.extend("at.clouddna.training00.zhoui5.controller.Main", {
+        ...HOUI5Formatter,
+
         onInit() {
-        },
-
-        genderFormatter: function(genderKey){
-            const view = this.getView(),
-                i18nModel = view.getModel("i18n"),
-                resourceBundle = i18nModel.getResourceBundle(),
-                formattedText = resourceBundle.getText(`gender.${genderKey == 0 ? 'male' : 'female'}`);
-
-            return formattedText;
         },
 
         onEmailPress: function(event){
@@ -65,7 +59,29 @@ sap.ui.define(
             });
 
 
-            debugger;
+            //Promise based OData V2 Operations
+            /*let read1Promise = new Promise((resolve, reject)=>{
+                model.read("/1", {
+                    success: (data)=>{
+                        resolve(data);
+                    },
+                    error: (error)=>{
+                        reject(error)
+                    }
+                })
+            })
+
+            let read2Promise = new Promise((resolve, reject)=>{
+                model.read("/2", {
+                    success: (data)=>{
+                        resolve(data);
+                    }
+                })
+            })
+
+            Promise.all([read1Promise, read2Promise]).then(()=>{
+
+            }).catch();*/
         }
       });
     }

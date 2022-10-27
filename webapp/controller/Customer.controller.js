@@ -3,15 +3,18 @@ sap.ui.define([
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
-    "sap/ui/core/routing/History"
+    "sap/ui/core/routing/History",
+    "at/clouddna/training00/zhoui5/controller/formatter/HOUI5Formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageBox, JSONModel, Fragment, History) {
+    function (Controller, MessageBox, JSONModel, Fragment, History, HOUI5Formatter) {
         "use strict";
 
         return Controller.extend("at.clouddna.training00.zhoui5.controller.Customer", {
+            ...HOUI5Formatter,
+
             _fragments: {},
             isCreateMode: false,
 
@@ -74,15 +77,6 @@ sap.ui.define([
                         page.insertContent(fragmentContent);
                     });
                 }
-            },
-
-            genderFormatter: function(genderKey){
-                const view = this.getView(),
-                    i18nModel = view.getModel("i18n"),
-                    resourceBundle = i18nModel.getResourceBundle(),
-                    formattedText = resourceBundle.getText(`gender.${genderKey == 0 ? 'male' : 'female'}`);
-
-                return formattedText;
             },
 
             onCancelPress: function(){
