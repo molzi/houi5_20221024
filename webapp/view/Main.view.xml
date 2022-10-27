@@ -9,30 +9,27 @@
     displayBlock="true"
     xmlns="sap.m"
 >
-    <uxap:ObjectPageLayout showAnchorBar="false">
+    <uxap:ObjectPageLayout showAnchorBar="false" >
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:expandedHeading>
                     <Title text="{i18n>main.page.title}"/>
                 </uxap:expandedHeading>
-
                 <uxap:snappedHeading>
                     <Title text="{i18n>main.page.title}"/>
                 </uxap:snappedHeading>
-        
                 <uxap:snappedTitleOnMobile>
                     <Title text="{i18n>main.page.title}" wrapping="true" />
                 </uxap:snappedTitleOnMobile>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
-
         <uxap:headerContent>
             <smartfilterbar:SmartFilterBar id="main_smartfilterbar" entitySet="ZHOUI5_CUSTOMERSET" />
         </uxap:headerContent>
         <uxap:sections>
-            <uxap:ObjectPageSection titleUppercase="false">
+            <uxap:ObjectPageSection titleUppercase="false" showTitle="false">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection showTitle="false">
                         <smarttable:SmartTable id="main_smarttable" smartFilterId="main_smartfilterbar" entitySet="ZHOUI5_CUSTOMERSET" enableAutoBinding="true" useVariantManagement="true" header="{i18n>main.table.title}" tableType="ResponsiveTable">
                             <Table sticky="ColumnHeaders">
                                 <columns>
