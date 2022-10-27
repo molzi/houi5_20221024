@@ -23,6 +23,14 @@ sap.ui.define(
             sap.m.URLHelper.triggerEmail(event.getSource().getText());
         },
 
+        onCreatePress: function(){
+            let router = this.getOwnerComponent().getRouter();
+
+
+            router.navTo("CreateCustomer");
+        },
+
+
         onCustomerPress: function(event){
             const customerId = event.getSource().getBindingContext().getObject().CustomerId,
                 router = this.getOwnerComponent().getRouter();

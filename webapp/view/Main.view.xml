@@ -4,7 +4,14 @@
     xmlns="sap.m">
     <Page id="main_page" title="{i18n>main.page.title}">
         <content>
-            <Table id="main_table" headerText="{i18n>main.table.title}" items="{/CustomerSet}" mode="Delete" delete="onCustomerDelete">
+            <Table id="main_table"  items="{/CustomerSet}" mode="Delete" delete="onCustomerDelete">
+                <headerToolbar>
+                    <OverflowToolbar >
+                        <Title text="{i18n>main.table.title}"/>
+                        <ToolbarSpacer/>
+                        <Button id="main_button_create" icon="sap-icon://add" type="Ghost" text="{i18n>button.create}" press="onCreatePress"/>
+                    </OverflowToolbar>
+                </headerToolbar>
                 <columns>
                     <Column >
                         <Text text="{i18n>customer.customerID}"/>

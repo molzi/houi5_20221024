@@ -72,7 +72,7 @@
         "dataSource": "ZHOUI5_CUSTOMER_SRV",
         "preload": true,
         "settings": {
-          "defaultBindingMode": "OneWay",
+          "defaultBindingMode": "TwoWay",
           "defaultCountMode": "Inline",
           "refreshAfterChange": true
         }
@@ -111,6 +111,11 @@
             "name": "Customer",
             "target": ["TargetCustomer"],
             "pattern": "customer/{customerId}"
+        }, 
+        {
+            "name": "CreateCustomer",
+            "target": ["TargetCustomer"],
+            "pattern": "createCustomer"
         }
       ],
       "targets": {

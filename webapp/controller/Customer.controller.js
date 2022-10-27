@@ -13,6 +13,7 @@ sap.ui.define([
 
         return Controller.extend("at.clouddna.training00.zhoui5.controller.Customer", {
             _fragments: {},
+            isCreateMode: false,
 
             onInit: function () {
                 let editModel = new JSONModel({
@@ -20,10 +21,9 @@ sap.ui.define([
                 });
 
                 this.getView().setModel(editModel, "editModel");
-                
-                this._showCustomerFragment("DisplayCustomer");
 
                 this.getOwnerComponent().getRouter().getRoute("Customer").attachPatternMatched(this._onPatternMatched.bind(this), this);
+                this.getOwnerComponent().getRouter().getRoute("CreateCustomer").attachPatternMatched(this._onCreatePatternMatched.bind(this), this);
             },
 
             _onPatternMatched: function(event){
@@ -33,6 +33,20 @@ sap.ui.define([
                     });
                 
                 this.getView().bindElement("/" + path);
+
+                this.isCreateMode = false;
+
+                this._toggleEdit(false);
+            },
+
+            _onCreatePatternMatched: function(){
+                let newCustomerContext = this.getView().getModel().createEntry("/CustomerSet");
+
+                this.getView().bindElement(newCustomerContext.getPath());
+
+                this.isCreateMode = true;
+                
+                this._toggleEdit(true);
             },
 
             _toggleEdit: function(isEditMode){
@@ -66,13 +80,25 @@ sap.ui.define([
                 const view = this.getView(),
                     i18nModel = view.getModel("i18n"),
                     resourceBundle = i18nModel.getResourceBundle(),
-                    formattedText = resourceBundle.getText(`gender.${genderKey}`);
+                    formattedText = resourceBundle.getText(`gender.${genderKey == 0 ? 'male' : 'female'}`);
 
                 return formattedText;
             },
 
             onCancelPress: function(){
-                this._toggleEdit(false);
+                let model = this.getView().getModel();
+
+                if(model.hasPendingChanges()){
+                    model.resetChanges().then(()=>{
+                        if(this.isCreateMode){
+                            this.onNavBack();
+                        } else {
+                            this._toggleEdit(false);
+                        }
+                    });
+                } else {
+                    this._toggleEdit(false);
+                }
             },
 
             onEditPress: function(){
@@ -80,13 +106,32 @@ sap.ui.define([
             },
 
             onSavePress: function(){
-                const view = this.getView(),
-                    model = view.getModel(),
-                    data = model.getData();
+                let model = this.getView().getModel(),
+                    i18nModel = this.getView().getModel("i18n"),
+                    resourceBundle = i18nModel.getResourceBundle(),
+                    successText = resourceBundle.getText(this.isCreateMode ? "msg.create.success" : "msg.save.success");
 
-                MessageBox.success(JSON.stringify(data));
 
-                this._toggleEdit(false);
+                if(model.hasPendingChanges()){
+                    model.submitChanges({
+                        success: ()=>{
+                            MessageBox.success(successText, {
+                                onClose: ()=>{
+                                    if(this.isCreateMode){
+                                        this.onNavBack();
+                                    } else {
+                                        this._toggleEdit(false);
+                                    }
+                                }
+                            });
+                        },
+                        error: (error)=>{
+                            MessageBox.error(error.message);
+                        }
+                    });
+                } else {
+                    this._toggleEdit(false);
+                }
             },
 
             onNavBack: function(){
