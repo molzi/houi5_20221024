@@ -32,10 +32,10 @@
                     <uxap:ObjectPageSubSection showTitle="false">
                         <smarttable:SmartTable id="main_smarttable" smartFilterId="main_smartfilterbar" entitySet="ZHOUI5_CUSTOMERSET" enableAutoBinding="true" useVariantManagement="true" header="{i18n>main.table.title}" tableType="ResponsiveTable">
                             <smarttable:customToolbar>
-                            <OverflowToolbar>
-                                        <ToolbarSpacer />
-                                        <Button id="main_button_create" icon="sap-icon://add" type="Ghost" text="{i18n>button.create}" press="onCreatePress" />
-                                    </OverflowToolbar>
+                                <OverflowToolbar>
+                                    <ToolbarSpacer />
+                                    <Button id="main_button_create" icon="sap-icon://add" type="Ghost" text="{i18n>button.create}" press="onCreatePress" />
+                                </OverflowToolbar>
                             </smarttable:customToolbar>
                             <Table sticky="ColumnHeaders">
                                 <columns>

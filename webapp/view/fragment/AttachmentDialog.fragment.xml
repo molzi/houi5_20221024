@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:upload="sap.m.upload">
+    <Dialog id="attachmentdialog" title="{i18n>attachments.dialog.title}" resizable="true" draggable="true">
+        <content>
+            <upload:UploadSet 
+                id="attachmentdialog_uploadset"
+                afterItemAdded="onAfterItemAdded"
+                uploadCompleted="onUploadCompleted"
+                items="{Documents}">
+                <upload:items>
+                    <upload:UploadSetItem url="{path: 'DocId', formatter: '.formatUrl'}" fileName="{DocumentName}" visibleRemove="true" removePressed="onRemoveAttachmentPress" visibleEdit="false"/>
+                </upload:items>
+            </upload:UploadSet>
+        </content>
+        <buttons>
+            <Button id="attachmentdialog_button_close" text="{i18n>button.close}" press="onCloseAttachmentDialogPress"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

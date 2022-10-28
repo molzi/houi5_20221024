@@ -4,18 +4,20 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
     "sap/ui/core/routing/History",
-    "at/clouddna/training00/zhoui5/controller/formatter/HOUI5Formatter"
+    "at/clouddna/training00/zhoui5/controller/formatter/HOUI5Formatter",
+    "sap/ui/core/Item"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageBox, JSONModel, Fragment, History, HOUI5Formatter) {
+    function (Controller, MessageBox, JSONModel, Fragment, History, HOUI5Formatter, Item) {
         "use strict";
 
         return Controller.extend("at.clouddna.training00.zhoui5.controller.Customer", {
             ...HOUI5Formatter,
 
             _fragments: {},
+            _attachmentsDialog: undefined,
             isCreateMode: false,
 
             onInit: function () {
@@ -124,5 +126,75 @@ sap.ui.define([
                     this._toggleEdit(false);
                 }
             },
+
+            onOpenAttachmentsPress: function(){
+                if(!this._attachmentsDialog){
+                    this._attachmentsDialog = Fragment.load({
+                        name: "at.clouddna.training00.zhoui5.view.fragment.AttachmentDialog",
+                        controller: this,
+                        id: this.getView().getId()
+                    }).then((fragmentContent)=>{
+                        this.getView().addDependent(fragmentContent);
+                        return fragmentContent;
+                    });
+                }
+
+                this._attachmentsDialog.then((dialog)=>{
+                    let uploadSet = this.getView().byId("attachmentdialog_uploadset");
+                    uploadSet.setUploadUrl(this.getModel().sServiceUrl + this.getView().getObjectBinding().getPath() + "/Documents");
+
+                    dialog.open();
+                });
+            },
+
+
+            onCloseAttachmentDialogPress: function(){
+                this._attachmentsDialog.then((dialog)=>{
+                    dialog.close();
+                })
+            },
+
+            onAfterItemAdded: function(event){
+                let uploadSet = this.getView().byId("attachmentdialog_uploadset"),
+                    uploadSetItem = event.getParameter("item"),
+                    fileName = uploadSetItem.getFileName();
+                    debugger;
+
+                uploadSet.removeAllHeaderFields();
+
+                let header = new Item({
+                    key: "x-csrf-token",
+                    text: this.getModel().getSecurityToken()
+                });
+
+                uploadSet.addHeaderField(header);
+
+                header = new Item({
+                    key: "slug",
+                    text: fileName
+                });
+
+                uploadSet.addHeaderField(header);
+            },
+
+            onUploadCompleted: function(){
+                this.getModel().refresh(true);
+            },
+
+            formatUrl: function(docId){
+                let path = this.getModel().createKey("/CustomerDocumentSet", {
+                    DocId: docId
+                });
+
+                return this.getModel().sServiceUrl + path + "/$value";
+            },
+
+            onRemoveAttachmentPress: function(event){
+                this.getModel().remove(event.getSource().getBindingContext().sPath, {
+                    success: ()=>{
+                        this.getModel().refresh(true);
+                    }
+                });
+            }
         });
     });
